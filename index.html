@@ -6,12 +6,20 @@
   </head>
 
   <body>
-    <h1>Slack Challenge</h1>
-    <div id="js-imgs-container" class="imgs-container"></div>
+    <div class="main-container">
+      <h1>Slack Challenge</h1>
+      <div id="js-imgs-container" class="imgs-container"></div>
+    </div>
 
     <div id="js-lightbox-container" class="lightbox-container">
-      <span id="js-lightbox-exit" class="lightbox-exit">X</span>
-      <img id="js-lightbox-current-image" class="lightbox-current-image" src="">
+      <span id="js-lightbox-exit" class="lightbox-exit">x</span>
+      <div id="js-lightbox-chevron-left" class="lightbox-chevron lightbox-chevron-left"><</div>
+      <div id="js-lightbox-chevron-right" class="lightbox-chevron lightbox-chevron-right">></div>
+
+      <div class="lightbox-current-image-container">
+        <img id="js-spinner" class="lightbox-loading-spinner" src="images/spinner.gif">
+        <img id="js-lightbox-current-image" class="lightbox-current-image" src="">
+      </div>
     </div>
   </body>
 

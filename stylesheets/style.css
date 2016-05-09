@@ -1,3 +1,21 @@
+html {
+  font-family: 'Helvetica', sans-serif;
+  background-color: #efefef;
+}
+
+body {
+  margin: 0;
+}
+
+.main-container {
+  padding: 20px;
+}
+
+h1 {
+  color: #333;
+  margin: 0 0 10px;
+}
+
 .img-item {
   display: inline-block;
   vertical-align: middle;
@@ -12,6 +30,8 @@
   left: 0;
   right: 0;
   background-color: #444;
+  background-color: rgba(20,20,20,.9);
+  padding: 7%;
   display: none;
 }
 
@@ -19,15 +39,26 @@
   display: block;
 }
 
+.lightbox-current-image-container {
+  text-align: center;
+}
+
 .lightbox-current-image {
   position: relative;
-  max-width: 95%;
-  height: auto;
-  margin: 30px auto 0;
+  max-width: 90%;
+  max-height: 90%;
+  opacity: 1;
+  transition: all .25s linear;
+}
+
+.lightbox-img-transition-right,
+.lightbox-img-transition-left {
+  opacity: 0;
 }
 
 .lightbox-exit {
   font-weight: 600;
+  font-size: 28px;
   cursor: pointer;
   position: absolute;
   right: 15px;
@@ -35,3 +66,35 @@
   z-index: 9;
 }
 
+.lightbox-chevron {
+  position: absolute;
+  font-size: 44px;
+  line-height: 44px;
+  top: 50%;
+  margin-top: -44px;
+  cursor: pointer;
+  z-index: 9;
+}
+
+.lightbox-chevron-right {
+  right: 15px;
+}
+
+.lightbox-chevron-left {
+  left: 15px;
+}
+
+.lightbox-loading-spinner {
+  display: none;
+  height: 175px;
+  width: 175px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin-top: -100px;
+  margin-left: -100px;
+}
+
+.lightbox-loading-spinner.show-spinner {
+  display: block;
+}
