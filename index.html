@@ -7,7 +7,14 @@
 
   <body>
     <div class="main-container">
-      <h1>Slack Challenge</h1>
+      <div class="header">
+        <h1>Slack Challenge</h1>
+        <form class="search-form">
+          <input id="js-search-input" class="search-input" type="text" placeholder="Enter a search term...">
+          <button id="js-search-button">Go</button>
+        </form>
+      </div>
+
       <div id="js-imgs-container" class="imgs-container"></div>
     </div>
 
@@ -17,6 +24,7 @@
       <div id="js-lightbox-chevron-right" class="lightbox-chevron lightbox-chevron-right">></div>
 
       <div class="lightbox-current-image-container">
+        <h3 id="js-lightbox-title" class="lightbox-title"></h3>
         <img id="js-spinner" class="lightbox-loading-spinner" src="images/spinner.gif">
         <img id="js-lightbox-current-image" class="lightbox-current-image" src="">
       </div>

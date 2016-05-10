@@ -16,6 +16,16 @@ h1 {
   margin: 0 0 10px;
 }
 
+h1,
+.search-form {
+  display: inline-block;
+  vertical-align: bottom;
+}
+
+.search-form {
+  margin-left: 10px;
+}
+
 .img-item {
   display: inline-block;
   vertical-align: middle;
@@ -41,18 +51,24 @@ h1 {
 
 .lightbox-current-image-container {
   text-align: center;
+  max-width: 90%;
+  max-height: 90%;
+  margin: auto;
+}
+
+.lightbox-title {
+  color: #ddd;
 }
 
 .lightbox-current-image {
   position: relative;
-  max-width: 90%;
-  max-height: 90%;
+  max-width: 100%;
+  height: 100%;
   opacity: 1;
   transition: all .25s linear;
 }
 
-.lightbox-img-transition-right,
-.lightbox-img-transition-left {
+.lightbox-img-transition {
   opacity: 0;
 }
 
