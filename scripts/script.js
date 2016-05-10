@@ -11,7 +11,7 @@
   var lightboxVisibleClass = 'lightbox-visible';
   var containerEl;
 
-  // dom querying after window has loaded
+  // execute code after window has loaded to ensure all dom elements are present
   window.onload = function() {
     containerEl         = document.getElementById('js-imgs-container');
     var chevronLeft     = document.getElementById('js-lightbox-chevron-left');
@@ -79,72 +79,72 @@
       spinner.classList.remove('show-spinner');
     };
 
-  }
-
-  // ajax response parsing
-  var parseResponse = function parseResponse(json) {
-    if (json.items) {
-      if (containerEl) {
-        containerEl.innerHTML = '';
-      }
-      var imgObjects = json.items;
-
-      lastImg = 'imgItem' + (imgObjects.length - 1);
-
-      imgObjects.forEach(function(imgObj, index) {
-        var imgEl    = document.createElement('div');
-        var imgThumb = imgObj.image.thumbnailLink;
-        var imgId    = 'imgItem' + index;
-        imgModels[imgId] = {src: imgObj.link, width: imgObj.height, height: imgObj.height, title: imgObj.title};
-        imgEl.id = imgId;
-        imgEl.classList.add('img-item');
-        imgEl.innerHTML = '<img src="' + imgThumb + '">';
-        containerEl.appendChild(imgEl);
-
-        imgEl.onclick = function() {
-          lightboxContainerEl.classList.add(lightboxVisibleClass);
-          lightboxImgEl.src         = imgModels[this.id].src;
-          lightboxTitleEl.innerHTML = imgModels[this.id].title;
-          activeLightboxImage       = this.id;
+    // ajax response parsing
+    var parseResponse = function parseResponse(json) {
+      if (json.items) {
+        if (containerEl) {
+          containerEl.innerHTML = '';
         }
-      });
+        var imgObjects = json.items;
+
+        lastImg = 'imgItem' + (imgObjects.length - 1);
+
+        imgObjects.forEach(function(imgObj, index) {
+          var imgEl    = document.createElement('div');
+          var imgThumb = imgObj.image.thumbnailLink;
+          var imgId    = 'imgItem' + index;
+          imgModels[imgId] = {src: imgObj.link, width: imgObj.height, height: imgObj.height, title: imgObj.title};
+          imgEl.id = imgId;
+          imgEl.classList.add('img-item');
+          imgEl.innerHTML = '<img src="' + imgThumb + '">';
+          containerEl.appendChild(imgEl);
+
+          imgEl.onclick = function() {
+            lightboxContainerEl.classList.add(lightboxVisibleClass);
+            lightboxImgEl.src         = imgModels[this.id].src;
+            lightboxTitleEl.innerHTML = imgModels[this.id].title;
+            activeLightboxImage       = this.id;
+          }
+        });
 
 
-    } else {
-      console.log('error parsing response');
-    }
-  };
-
-  // ajax request
-  var searchImages = function searchImages(query) {
-    imgModels = {};
-
-    // image search endpoint
-    query  = query || 'cat';
-    var googleSearchBaseUrl = 'https://www.googleapis.com/customsearch/v1?';
-    var apiKey = '5da789639b22c37d65c515690ff1242d';
-    var cx     = '008551058298757543433%3A-pvpymqftmu'; // custom search engine id
-    var key    = 'AIzaSyC1lkGiYxLZI83VLf4K09G9UzC742GZldc';
-    var searchUrl = googleSearchBaseUrl + 'q=' + query + '&cx=' + cx + '&searchType=image&key=' + key;
-    var xhr = new XMLHttpRequest();
-
-    xhr.open('GET', searchUrl);
-    xhr.send(null);
-
-    xhr.onreadystatechange = function () {
-      var DONE = 4;
-      var OK   = 200;
-      if (xhr.readyState === DONE) {
-        if (xhr.status === OK) {
-          var parsedJson = JSON.parse(xhr.responseText);
-          parseResponse(parsedJson);
-        } else {
-          console.log('Error: ' + xhr.status);
-        }
+      } else {
+        console.log('error parsing response');
       }
     };
-  };
 
-  searchImages();
+    // ajax request
+    var searchImages = function searchImages(query) {
+      imgModels = {};
+
+      // image search endpoint
+      query  = query || 'cat';
+      var googleSearchBaseUrl = 'https://www.googleapis.com/customsearch/v1?';
+      var apiKey = '5da789639b22c37d65c515690ff1242d';
+      var cx     = '008551058298757543433%3A-pvpymqftmu'; // custom search engine id
+      var key    = 'AIzaSyC1lkGiYxLZI83VLf4K09G9UzC742GZldc';
+      var searchUrl = googleSearchBaseUrl + 'q=' + query + '&cx=' + cx + '&searchType=image&key=' + key;
+      var xhr = new XMLHttpRequest();
+
+      xhr.open('GET', searchUrl);
+      xhr.send(null);
+
+      xhr.onreadystatechange = function () {
+        var DONE = 4;
+        var OK   = 200;
+        if (xhr.readyState === DONE) {
+          if (xhr.status === OK) {
+            var parsedJson = JSON.parse(xhr.responseText);
+            parseResponse(parsedJson);
+          } else {
+            console.log('Error: ' + xhr.status);
+          }
+        }
+      };
+    };
+
+    searchImages();
+
+  }
 
 })();
