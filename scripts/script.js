@@ -1,10 +1,3 @@
-// TODOS:
-// use this rather than var
-// keep array passed by google api as model rather than creating object model??
-// allow scrolling with arrow keypress
-// exit lightbox with esc keypress
-// ui niceties
-
 'use strict';
 
 (function() {
